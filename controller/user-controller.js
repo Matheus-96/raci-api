@@ -10,7 +10,7 @@ export const create = async(req, res) => {
 
     } else {
         res.statusCode = 500
-        res.send({ error: "Dados invalidos." })
+        res.send({ error: "Dados invalidos.", dados: user })
     }
 }
 
