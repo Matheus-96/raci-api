@@ -18,4 +18,4 @@ app.get('/', (req, res) => {
     res.send("API WORKING")
 })
 
-app.listen(8000)
+app.listen(proces.env.PORT || 3000)
