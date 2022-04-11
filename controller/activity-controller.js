@@ -3,8 +3,54 @@ import * as service from '../service/activity-service.js'
 export const create = async(req, res) => {
     let activity = req.body
     let response = await service.create(activity)
+
+    await service.adduser({
+        user_id: activity.responsible,
+        activity_id: response._id,
+        role: 'Responsible'
+    })
+    await service.notifyUser({
+        user_id: activity.responsible,
+        activity_id: response._id,
+        description: "You were included in an activity as Responsible"
+    })
+
+    await service.adduser({
+        user_id: activity.accountable,
+        activity_id: response._id,
+        role: 'Accountable'
+    })
+    await service.notifyUser({
+        user_id: activity.accountable,
+        activity_id: response._id,
+        description: "You were included in an activity as Accountable"
+    })
+
+    await service.adduser({
+        user_id: activity.consulted,
+        activity_id: response._id,
+        role: 'Consulted'
+    })
+    await service.notifyUser({
+        user_id: activity.consulted,
+        activity_id: response._id,
+        description: "You were included in an activity as Consulted"
+    })
+
+    await service.adduser({
+        user_id: activity.informed,
+        activity_id: response._id,
+        role: 'Informed'
+    })
+    await service.notifyUser({
+        user_id: activity.informed,
+        activity_id: response._id,
+        description: "You were included in an activity as Informed"
+    })
+
     res.statusCode = 201
     res.send(response)
+
 }
 
 export const adduser = async(req, res) => {

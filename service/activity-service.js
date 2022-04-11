@@ -57,8 +57,7 @@ export const notifyUser = async(data) => {
 
 export const getAllFromId = async(id) => {
     let db = await ConnectDatabase()
-    let response = await UserInActivity.find({ user_id: id }).populate('user_id activity_id')
-    db.disconnect()
+    let response = await UserInActivity.find({ user_id: id }).populate(['user_id', 'activity_id'])
     return response
 }
 
@@ -77,7 +76,7 @@ export const addcomment = async(_comment) => {
 export const getActivityFull = async(id) => {
     let db = await ConnectDatabase()
     let response = await Activity.findById(id)
-    response = response.toObject()
+    response = await response.toObject()
     response.comments = await CommentInActivity.find({ activity_id: id })
     db.disconnect()
     return response

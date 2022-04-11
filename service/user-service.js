@@ -1,3 +1,4 @@
+import { Notification } from '../models/notification.js'
 import { User } from '../models/user.js'
 import { ConnectDatabase } from '../service/db.js'
 
@@ -28,9 +29,22 @@ export const deleteById = async(id) => {
     return user
 }
 
+export const getNotification = async(id) => {
+    let db = await ConnectDatabase()
+    let user = await Notification.find({ user_id: id })
+    db.disconnect()
+    return user
+}
+
 export const getAll = async() => {
     let db = await ConnectDatabase()
     let users = await User.find()
-    db.disconnect()
     return users
+}
+
+export const authUser = async(user) => {
+    let db = await ConnectDatabase()
+    let response = await User.find({ name: user.name, password: user.password })
+    db.disconnect()
+    return response
 }

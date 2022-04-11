@@ -18,3 +18,11 @@ userRoutes.delete('/delete/:id', (req, res) => {
 userRoutes.get('/all', (req, res) => {
     controller.getAll(req, res)
 })
+
+userRoutes.post('/auth', (req, res) => {
+    controller.authUser(req, res)
+})
+
+userRoutes.get('/notification/:id', (req, res) => {
+    controller.getNotification(req, res)
+})
