@@ -90,7 +90,6 @@ export const getAllFromId = async(req, res) => {
 export const getActivityFull = async(req, res) => {
     let response = await service.getActivityFull(req.params.id)
     res.contentType('json')
-    console.log(response)
     res.json(response)
 }
 
