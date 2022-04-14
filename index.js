@@ -17,7 +17,7 @@ app.use('/activity', activityRoutes)
 
 app.get('/', (req, res) => {
     res.statusCode = 200
-    res.send("API WORKING")
+    res.send(`API para matriz RACI desenvolvida por Victor Matheus pode acessar o endpoint https://raci-api.herokuapp.com/user/all para testar o funcionamento :D`)
 })
 
 app.listen(process.env.PORT || 3001)
